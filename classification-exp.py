@@ -9,9 +9,9 @@ from metrics import accuracy, precision, recall
 
 np.random.seed(42)
 
-# ------------------------------
+
 # Generate dataset
-# ------------------------------
+
 X, y = make_classification(
     n_features=2, n_redundant=0, n_informative=2,
     random_state=1, n_clusters_per_class=2, class_sep=0.5
@@ -21,9 +21,9 @@ X, y = make_classification(
 plt.scatter(X[:, 0], X[:, 1], c=y)
 plt.show()
 
-# ------------------------------
+
 # Train/Test Split (single model on full features)
-# ------------------------------
+
 xtrain, xtest, ytrain, ytest = train_test_split(X, y, test_size=0.3, random_state=42)
 xtrain, xtest = pd.DataFrame(xtrain), pd.DataFrame(xtest)
 ytrain, ytest = pd.Series(ytrain), pd.Series(ytest)
@@ -38,9 +38,9 @@ for cls in np.unique(ytest):
     print(f"  Precision: {precision(y_hat, ytest, cls):.4f}")
     print(f"  Recall:    {recall(y_hat, ytest, cls):.4f}")
 
-# ------------------------------
+
 # Manual K-Fold Cross Validation
-# ------------------------------
+
 n_folds = 5
 dataset_size = len(X)
 indices = np.arange(dataset_size)
@@ -73,9 +73,9 @@ for i in range(n_folds):
 
 print(f"Mean accuracy is {np.mean(fold_accuracies):.4f}")
 
-# ------------------------------
+
 # Nested Cross Validation
-# ------------------------------
+
 def splitfold(x, n):
     i = np.arange(len(x))
     np.random.shuffle(i)
